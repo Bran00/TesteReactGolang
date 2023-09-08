@@ -11,7 +11,7 @@ import (
 )
 
 // Define structure of documents in the people collection
-type Job struct {
+type Job struct {	
 	JobName     string
 	Description string
 	Tags        []string

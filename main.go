@@ -10,17 +10,19 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+
+	"github.com/bran00/TesteReactGolang/router"
 )
 
 func main() {
-
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("Erro ao carregar arquivo .env")
 	}
 
 	mongoPassword := os.Getenv("MONGO_DB_PASSWORD")
+	mongoUriString := os.Getenv("MONGO_URI_STRING")
 
-	mongoURI := fmt.Sprintf("mongodb+srv://brandorocha00:%s@opojobs.vuzopga.mongodb.net/?retryWrites=true&w=majority", mongoPassword)
+	mongoURI := fmt.Sprintf(mongoUriString, mongoPassword)
 
 	// Use the SetServerAPIOptions() method to set the Stable API version to 1
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
@@ -42,6 +44,5 @@ func main() {
 	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{"ping", 1}}).Err(); err != nil {
 		panic(err)
 	}
-	data.Insert(mongoURI)
-	fmt.Println("Pinged your deployment. You successfully connected to MongoDB!")
+	router.Initialize(mongoURI)
 }

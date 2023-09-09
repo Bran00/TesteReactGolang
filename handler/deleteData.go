@@ -1,4 +1,4 @@
-package data
+package handler
 
 import (
 	"context"
@@ -42,3 +42,4 @@ func DeleteDocumentByID(uri string, documentID string) error {
 
 	return nil
 }
+

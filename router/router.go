@@ -1,10 +1,16 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"os"
+
+	"github.com/gin-gonic/gin"
+)
 
 func Initialize(uri string) {
 	router := gin.Default()
-
+	port := os.Getenv("PORT")
+	
 	initializeRoutes(router, uri)
-	router.Run(":8080")
+	router.Run(fmt.Sprintf(":%s", port))
 }

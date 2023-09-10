@@ -15,10 +15,6 @@ import (
 )
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Erro ao carregar arquivo .env")
-	}
-
 	mongoPassword := os.Getenv("MONGO_DB_PASSWORD")
 	mongoUriString := os.Getenv("MONGO_URI_STRING")
 

@@ -3,7 +3,6 @@ module github.com/bran00/TesteReactGolang
 go 1.18
 
 require (
-	github.com/joho/godotenv v1.5.1
 	go.mongodb.org/mongo-driver v1.12.1
 )
 

@@ -10,7 +10,7 @@ import (
 
 type ShowAllResponse struct {
 	Error    error
-	Response []Job
+	Response []bson.M // Usamos bson.M para incluir o campo _id
 }
 
 func ShowAll(uri string) ShowAllResponse {
@@ -31,10 +31,9 @@ func ShowAll(uri string) ShowAllResponse {
 	}
 	defer cursor.Close(context.Background())
 
-	var results []Job
-
+	var results []bson.M
 	for cursor.Next(context.Background()) {
-		var result Job
+		var result bson.M
 		err := cursor.Decode(&result)
 		if err != nil {
 			return ShowAllResponse{Error: err}

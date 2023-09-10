@@ -14,6 +14,8 @@ type Job struct {
 	JobName     string
 	Description string
 	Tags        []string
+	Link 				string
+	Location    string
 	DateCreated time.Time
 }
 
@@ -25,6 +27,8 @@ type InsertRequest struct {
 	JobName     string   `json:"jobName"`
 	Description string   `json:"description"`
 	Tags        []string `json:"tags"`
+	Link 				string   `json:"link"`
+	Location    string   `json:"location"`
 }
 
 func Insert(uri string, requestData InsertRequest) (InsertResponse, error) {
@@ -43,6 +47,8 @@ func Insert(uri string, requestData InsertRequest) (InsertResponse, error) {
 		JobName:     requestData.JobName,
 		Description: requestData.Description,
 		Tags:        requestData.Tags,
+		Link:        requestData.Link,
+		Location:    requestData.Location,
 		DateCreated: time.Now(),
 	}
 

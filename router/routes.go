@@ -1,7 +1,6 @@
 package router
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,7 +25,6 @@ func initializeRoutes(router *gin.Engine, uri string) {
 
 			// Atribua os dados retornados pela função à variável data
 			data := response.Response
-			fmt.Println(data)
 			// Envie os dados na resposta JSON
 			c.JSON(http.StatusOK, gin.H{
 				"message": "Documentos listados com sucesso",

@@ -3,8 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 
+	// "github.com/gin-contrib/cors" // Comente ou remova esta linha
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -13,6 +17,7 @@ import (
 )
 
 func main() {
+
 	mongoPassword := os.Getenv("MONGO_DB_PASSWORD")
 	mongoUriString := os.Getenv("MONGO_URI_STRING")
 
@@ -34,9 +39,13 @@ func main() {
 		}
 	}()
 
-	// Send a ping to confirm a successful connection
 	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
 		panic(err)
 	}
-	router.Initialize(mongoURI)
+
+	r := router.Initialize(mongoURI)
+
+	// Iniciar o servidor na porta desejada
+	http.Handle("/", r)
+	log.Fatal(http.ListenAndServe(":8080", nil)) // Substitua pela porta desejada
 }
